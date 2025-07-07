@@ -1,8 +1,8 @@
 import React from "react";
 import Tab from "../components/Tab";
-import LinkForm from "../components/linkForm";
 
 import "./../styles/navbar.css";
+import LinkForm from "../components/LinkForm.jsx";
 function Navbar({ setTelegramLink }) {
   return (
     <nav id="navbar">

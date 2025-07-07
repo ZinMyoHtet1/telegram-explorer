@@ -30,7 +30,9 @@ function Home() {
     if (telegramLink) {
       setLoading(true);
       setContents(null);
-      fetch(`http://localhost:3001/api/telegram?url=${telegramLink}`)
+      fetch(
+        `https://telegram-explorer.onrender.com/api/telegram?url=${telegramLink}`
+      )
         .then((res) => res.json())
         .then((data) => {
           setContents(data.data);
