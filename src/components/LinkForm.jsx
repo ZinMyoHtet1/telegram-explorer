@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 
 import "./../styles/linkForm.css";
-import SearchIcon from "../svgs/searchIcon";
+import SearchIcon from "../svgs/SearchIcon.jsx";
 
 function LinkForm({ setTelegramLink }) {
   const inputRef = useRef(null);
