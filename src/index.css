@@ -57,12 +57,10 @@ body {
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  /* min-height: 100dvh; */
   user-select: none;
-  height: 100%;
+  height: calc(var(--vh, 1vh) * 100);
 }
 
 #root {
-  height: 100vh;
-  height: 100dvh;
+  height: 100%;
 }

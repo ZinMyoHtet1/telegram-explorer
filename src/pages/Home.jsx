@@ -65,10 +65,8 @@ function Home() {
   };
 
   useEffect(() => {
-    if (contents) {
+    if (!telegramLink) {
       navigate("/videos");
-    } else {
-      navigate("/");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
