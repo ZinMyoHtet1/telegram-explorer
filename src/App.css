@@ -3,19 +3,17 @@
   grid-template-columns: repeat(5, minmax(100px, 1fr));
   gap: 10px;
   grid-row: auto;
-  /* margin-top: 120px; */
   overflow-y: auto;
   overflow-x: hidden;
   width: 100%;
-  /* min-height: 80vh; */
   height: max-content;
+  padding: 8px 0;
 }
 
 .page {
   width: 100%;
   position: relative;
   height: 100%;
-  /* background-color: red; */
 }
 
 .overlay_page {
@@ -37,7 +35,6 @@
   width: 1000px;
   height: 100%;
   position: relative;
-  /* padding: 0; */
 }
 
 .btn {
@@ -47,6 +44,18 @@
 
 .btn:active {
   transform: translateY(-1px);
+}
+
+.load_more_btn {
+  border: none;
+  background-color: #ffd60a;
+  padding: 6px 8px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 4px;
+  color: #2f2d2d;
+  text-transform: capitalize;
+  box-shadow: 1px 1px 6px rgba(255, 255, 255, 0.2);
 }
 
 @media screen and (max-width: 1030px) {
@@ -63,10 +72,9 @@
   .page .wrapper {
     width: 600px;
   }
-
-  /* .content_grid {
-    grid-template-columns: repeat(4, minmax(100px, 1fr));
-  } */
+  .load_more_btn {
+    font-size: 12px;
+  }
 }
 
 @media screen and (max-width: 620px) {
@@ -77,6 +85,12 @@
   .content_grid {
     grid-template-columns: repeat(3, minmax(100px, 1fr));
     gap: 4px;
+    padding: 2px 0 6px;
+  }
+
+  .load_more_btn {
+    font-size: 10px;
+    padding: 6px 6px;
   }
 }
 
@@ -86,8 +100,13 @@
   }
 
   .content_grid {
-    grid-template-columns: repeat(3, minmax(70px, 1fr));
-    gap: 4px 4px;
+    grid-template-columns: repeat(3, minmax(80px, 1fr));
+    padding: 0;
+  }
+  .load_more_btn {
+    font-size: 8px;
+    font-weight: 400;
+    padding: 4px 6px;
   }
 }
 
@@ -98,5 +117,9 @@
 
   .content_grid {
     gap: 2px;
+  }
+
+  .load_more_btn {
+    font-size: 6px;
   }
 }
