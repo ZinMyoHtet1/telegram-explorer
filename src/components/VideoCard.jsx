@@ -22,10 +22,11 @@ function VideoCard({ video, ...rest }) {
       />
       <span className="duration">{video.duration}</span>
       <PlayVideoIcon
-        className="play_video_icon"
+        className="play_video_icon btn"
         fill="#fff"
         width="24"
         height="24"
+        onClick={() => handlePlayVideo(video)}
       />
     </div>
   );

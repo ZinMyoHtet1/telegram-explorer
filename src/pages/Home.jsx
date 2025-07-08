@@ -55,6 +55,7 @@ function Home() {
             .catch((err) => {
               console.error("Error fetching Telegram videos:", err);
               setError(err.message);
+              setLoading(false);
             });
         })
         .catch((error) => setError(error.message));
