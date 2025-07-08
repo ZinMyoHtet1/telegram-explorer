@@ -3,6 +3,10 @@
   grid-template-columns: repeat(5, minmax(100px, 1fr));
   gap: 10px;
   grid-row: auto;
+  /* margin-top: 120px; */
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-height: 80vh;
 }
 
 .page {
@@ -30,7 +34,7 @@
 .page .wrapper {
   width: 1000px;
   height: 100%;
-
+  position: relative;
   /* padding: 0; */
 }
 

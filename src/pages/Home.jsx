@@ -45,7 +45,7 @@ function Home() {
               return res.json();
             })
             .then((data) => {
-              if (data.data.videos.length && data.data.photos.length) {
+              if (data.data.videos.length || data.data.photos.length) {
                 setContents(data.data);
               } else {
                 setError("This telegram link is private channel or not found.");
@@ -58,28 +58,12 @@ function Home() {
             });
         })
         .catch((error) => setError(error.message));
-
-      // let validTelegram = telegramLink.trim();
-      // if (
-      //   validTelegram.startsWith("https://t.me/") ||
-      //   validTelegram.startsWith("t.me/")
-      // ) {
-      //   validTelegram = validTelegram.replace("https://", "");
-      //   if (!validTelegram.startsWith("t.me/s")) {
-      //     validTelegram = validTelegram.replace("t.me", "t.me/s");
-      //   }
-      //   validTelegram = "https://" + validTelegram;
-
-      // } else {
-      //   console.log("Invalid TelegramLink: " + telegramLink);
-      // }
     }
   }, [telegramLink]);
   return (
     <MediaProvider value={{ setMedia }}>
       <div id="home_page" className="page">
         <div className="wrapper">
-          <h2>Telegram Explorer</h2>
           <Navbar setTelegramLink={setTelegramLink} />
           {loading && (
             <LoadingSpinner
@@ -98,6 +82,7 @@ function Home() {
           )}
         </div>
       </div>
+      <span id="developed_by">@jys72025</span>
       {media && <Media media={media} />}
     </MediaProvider>
   );
