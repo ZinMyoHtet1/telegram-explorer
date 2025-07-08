@@ -4,16 +4,20 @@ import { useNavigate, useParams } from "react-router-dom";
 import { MediaProvider } from "../contexts/mediaContext";
 import VideoContainer from "../containers/VideoContainer";
 import PhotoContainer from "../containers/PhotoContainer";
+import LoadingSpinner from "./../svgs/LoadingSpinner";
 import Navbar from "../containers/Navbar";
 import Media from "./Media";
 // import fetchTelegramURL from "../utils/fetchTelegramURL";
 
 import "./../styles/home.css";
+import validateUrl from "../utils/validateUrl";
+import ErrorMessage from "../components/ErrorMessage";
 function Home() {
   const [telegramLink, setTelegramLink] = useState(null);
   const [contents, setContents] = useState(null);
   const [media, setMedia] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
   const { tab } = useParams();
 
@@ -28,19 +32,47 @@ function Home() {
 
   useEffect(() => {
     if (telegramLink) {
-      setLoading(true);
-      setContents(null);
-      fetch(
-        `https://telegram-explorer.onrender.com/api/telegram?url=${telegramLink}`
-      )
-        .then((res) => res.json())
-        .then((data) => {
-          setContents(data.data);
-          setLoading(false);
+      validateUrl(telegramLink)
+        .then((validTelegram) => {
+          setError(null);
+          setLoading(true);
+          setContents(null);
+          fetch(
+            `https://telegram-explorer.onrender.com/api/telegram?url=${validTelegram}`
+          )
+            .then((res) => {
+              console.log(res, "response");
+              return res.json();
+            })
+            .then((data) => {
+              if (data.data.videos.length && data.data.photos.length) {
+                setContents(data.data);
+              } else {
+                setError("This telegram link is private channel or not found.");
+              }
+              setLoading(false);
+            })
+            .catch((err) => {
+              console.error("Error fetching Telegram videos:", err);
+              setError(err.message);
+            });
         })
-        .catch((err) => {
-          console.error("Error fetching Telegram videos:", err);
-        });
+        .catch((error) => setError(error.message));
+
+      // let validTelegram = telegramLink.trim();
+      // if (
+      //   validTelegram.startsWith("https://t.me/") ||
+      //   validTelegram.startsWith("t.me/")
+      // ) {
+      //   validTelegram = validTelegram.replace("https://", "");
+      //   if (!validTelegram.startsWith("t.me/s")) {
+      //     validTelegram = validTelegram.replace("t.me", "t.me/s");
+      //   }
+      //   validTelegram = "https://" + validTelegram;
+
+      // } else {
+      //   console.log("Invalid TelegramLink: " + telegramLink);
+      // }
     }
   }, [telegramLink]);
   return (
@@ -49,7 +81,15 @@ function Home() {
         <div className="wrapper">
           <h2>Telegram Explorer</h2>
           <Navbar setTelegramLink={setTelegramLink} />
-          {loading && <p className="loading_text">loading...</p>}
+          {loading && (
+            <LoadingSpinner
+              width="24"
+              height="24"
+              fill="gray"
+              className="loading_spinner"
+            />
+          )}
+          {error && <ErrorMessage message={error} />}
           {tab === "videos" && contents?.videos.length > 0 && (
             <VideoContainer videos={contents.videos} />
           )}
