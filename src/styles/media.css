@@ -4,11 +4,15 @@
   display: flex;
 }
 
-#media video,
-#media img.photo {
+#media video {
   height: fit-content;
   /* width: fit-content; */
   width: 800px;
+}
+
+#media img.photo {
+  height: 100%;
+  width: fit-content;
 }
 
 #media .media_navbar {

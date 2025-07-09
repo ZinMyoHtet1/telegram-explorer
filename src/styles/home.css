@@ -51,8 +51,8 @@
 
   #developed_by {
     font-size: 12px;
-    bottom: 3px;
-    left: 5px;
+    bottom: 4px;
+    left: 4px;
   }
 
   #home_page .loading_text {
@@ -93,7 +93,7 @@
   }
   #developed_by {
     font-size: 8px;
-    bottom: 2px;
-    left: 2px;
+    /* bottom: 4px;
+    left: 4px; */
   }
 }

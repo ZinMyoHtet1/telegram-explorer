@@ -30,8 +30,8 @@ function PhotoContainer({ photos, children }) {
             />
           </div>
         ))}
+        <div className="load_more_container">{children}</div>
       </div>
-      {children}
     </div>
   );
 }
