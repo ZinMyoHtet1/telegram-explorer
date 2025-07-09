@@ -11,8 +11,7 @@ function VideoContainer({ videos, children }) {
           <VideoCard video={video} key={`photo-${index}`} />
         ))}
       </div>
-      {children}
-      {/* <button className="load_more_btn btn">load more</button> */}
+      <div className="load_more_container">{children}</div>
     </div>
   );
 }

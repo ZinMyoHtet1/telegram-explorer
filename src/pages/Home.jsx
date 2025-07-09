@@ -25,8 +25,8 @@ function Home() {
   const handleLoadMore = (lastIndex, type) => {
     validateUrl(telegramLink)
       .then((validTelegram) => {
+        console.log(validTelegram, "valid");
         setLoadingMore(true);
-
         fetch(
           `https://telegram-explorer.onrender.com/api/loadMore?url=${validTelegram}&lastIndex=${lastIndex}&type=${type.toLowerCase()}`
         )
@@ -93,6 +93,7 @@ function Home() {
             })
             .catch((err) => {
               // console.error("Error fetching Telegram videos:", err);
+              setTelegramLink(null);
               setError(err.message);
               setLoading(false);
             });
