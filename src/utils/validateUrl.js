@@ -9,9 +9,13 @@ function validateUrl(telegramLink) {
         validTelegram = validTelegram.replace("https://", "");
         if (!validTelegram.startsWith("t.me/s")) {
           validTelegram = validTelegram.replace("t.me", "t.me/s");
+          const array = validTelegram.split("/");
+          if (typeof parseInt(array.at(-1)) === "number") {
+            array.pop();
+          }
+          validTelegram = array.join("/");
         }
         validTelegram = "https://" + validTelegram;
-
         resolve(validTelegram);
       }
       throw new Error("Invalid URL: " + validTelegram);

@@ -31,11 +31,9 @@ function Home() {
           `https://telegram-explorer.onrender.com/api/loadMore?url=${validTelegram}&lastIndex=${lastIndex}&type=${type.toLowerCase()}`
         )
           .then((res) => {
-            console.log(res, "response");
             return res.json();
           })
           .then((data) => {
-            console.log(data.data, "load more data");
             if (data.data.videos) {
               setContents((prev) => {
                 return {

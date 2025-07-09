@@ -59,6 +59,7 @@ body {
   justify-content: center;
   user-select: none;
   height: calc(var(--vh, 1vh) * 100);
+  overflow: hidden;
 }
 
 #root {

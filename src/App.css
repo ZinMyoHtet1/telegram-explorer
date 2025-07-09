@@ -4,7 +4,7 @@
   gap: 10px;
   grid-row: auto;
   /* width: fit-content; */
-  height: calc(var(--vh, 1vh) * 78);
+  height: calc(var(--vh, 1vh) * 75);
   overflow-y: auto;
   overflow-x: hidden;
   align-content: flex-start;
