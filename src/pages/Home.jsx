@@ -31,7 +31,9 @@ function Home() {
           ? setLoadingMorePhoto(true)
           : setLoadingMoreVideo(true);
         fetch(
-          `https://telegram-explorer.onrender.com/api/loadMore?url=${validTelegram}&lastIndex=${lastIndex}&type=${type.toLowerCase()}`
+          `https://telegram-explorer.onrender.com/api/loadMore?url=${validTelegram}&lastIndex=${
+            lastIndex - 1
+          }&type=${type.toLowerCase()}`
         )
           .then((res) => {
             return res.json();
