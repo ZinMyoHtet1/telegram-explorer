@@ -10,8 +10,9 @@ function VideoContainer({ videos, children }) {
         {videos.map((video, index) => (
           <VideoCard video={video} key={`photo-${index}`} />
         ))}
-      </div>
       <div className="load_more_container">{children}</div>
+
+      </div>
     </div>
   );
 }

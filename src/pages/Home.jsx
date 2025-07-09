@@ -17,7 +17,8 @@ function Home() {
   const [contents, setContents] = useState(null);
   const [media, setMedia] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [loadingMore, setLoadingMore] = useState(false);
+  const [loadingMoreVideo, setLoadingMoreVideo] = useState(false);
+  const [loadingMorePhoto, setLoadingMorePhoto] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const { tab } = useParams();
@@ -26,7 +27,9 @@ function Home() {
     validateUrl(telegramLink)
       .then((validTelegram) => {
         console.log(validTelegram, "valid");
-        setLoadingMore(true);
+        type === "photo"
+          ? setLoadingMorePhoto(true)
+          : setLoadingMoreVideo(true);
         fetch(
           `https://telegram-explorer.onrender.com/api/loadMore?url=${validTelegram}&lastIndex=${lastIndex}&type=${type.toLowerCase()}`
         )
@@ -51,12 +54,15 @@ function Home() {
                 };
               });
             }
-            setLoadingMore(false);
+
+            setLoadingMorePhoto(false);
+            setLoadingMoreVideo(false);
           })
           .catch((err) => {
             // console.error("Error fetching Telegram videos:", err);
             setError(err.message);
-            setLoadingMore(false);
+            setLoadingMorePhoto(false);
+            setLoadingMoreVideo(false);
           });
       })
       .catch((error) => setError(error.message));
@@ -116,7 +122,11 @@ function Home() {
           )}
           {tab === "videos" && contents?.videos.length > 0 && (
             <VideoContainer videos={contents.videos}>
-              {loadingMore ? (
+              {contents.videos.length === 0 && (
+                <p className="no_content_message">no video found</p>
+              )}
+
+              {loadingMoreVideo ? (
                 <p className="loading_text">loading...</p>
               ) : (
                 contents.lastVideoIndex && (
@@ -134,7 +144,10 @@ function Home() {
           )}
           {tab === "photos" && contents?.photos?.length > 0 && (
             <PhotoContainer photos={contents.photos}>
-              {loadingMore ? (
+              {contents.photos.length === 0 && (
+                <p className="no_content_message">no photo found</p>
+              )}
+              {loadingMorePhoto ? (
                 <p className="loading_text">loading...</p>
               ) : (
                 contents.lastPhotoIndex && (
