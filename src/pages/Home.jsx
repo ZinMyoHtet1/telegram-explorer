@@ -98,13 +98,14 @@ function Home() {
               setLoading(false);
             })
             .catch((err) => {
-              // console.error("Error fetching Telegram videos:", err);
               setTelegramLink(null);
               setError(err.message);
               setLoading(false);
             });
         })
-        .catch((error) => setError(error.message));
+        .catch((error) => {
+          setError(error.message);
+        });
     }
   }, [telegramLink]);
   return (
@@ -120,9 +121,9 @@ function Home() {
               className="loading_spinner"
             />
           )}
-          {tab === "videos" && contents?.videos.length > 0 && (
+          {tab === "videos" && contents?.videos?.length > 0 && (
             <VideoContainer videos={contents.videos}>
-              {contents.videos.length === 0 && (
+              {contents?.videos?.length === 0 && (
                 <p className="no_content_message">no video found</p>
               )}
 
@@ -143,8 +144,8 @@ function Home() {
             </VideoContainer>
           )}
           {tab === "photos" && contents?.photos?.length > 0 && (
-            <PhotoContainer photos={contents.photos}>
-              {contents.photos.length === 0 && (
+            <PhotoContainer photos={contents?.photos}>
+              {contents.photos?.length === 0 && (
                 <p className="no_content_message">no photo found</p>
               )}
               {loadingMorePhoto ? (
